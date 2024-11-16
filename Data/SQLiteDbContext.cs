@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using csharp_EZReserve.Models.Configurations;
+using csharp_EZReserve.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace csharp_EZReserve.Data
@@ -15,12 +17,20 @@ namespace csharp_EZReserve.Data
         }
 
         // Initiale DbSets for models and set data source
+        public DbSet<Customer> Customers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
             optionsBuilder.UseSqlite("Data Source=CustomerEvidence.db");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
         }
     }
 }
