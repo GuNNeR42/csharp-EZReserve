@@ -1,4 +1,4 @@
-﻿namespace csharp_EZReserve.Forms
+﻿namespace csharp_EZReserve.Forms.Customers
 {
     partial class CustomersDataForm
     {
@@ -58,6 +58,7 @@
             button_add.TabIndex = 1;
             button_add.Text = "Add Customer";
             button_add.UseVisualStyleBackColor = true;
+            button_add.Click += button_add_Click;
             // 
             // button_update
             // 
@@ -67,6 +68,7 @@
             button_update.TabIndex = 1;
             button_update.Text = "Update Customer";
             button_update.UseVisualStyleBackColor = true;
+            button_update.Click += button_update_Click;
             // 
             // button_delete
             // 
@@ -76,6 +78,7 @@
             button_delete.TabIndex = 1;
             button_delete.Text = "Delete Customer";
             button_delete.UseVisualStyleBackColor = true;
+            button_delete.Click += button_delete_Click;
             // 
             // button_details
             // 
@@ -99,7 +102,7 @@
             Controls.Add(dataGridView_customers);
             Name = "CustomersDataForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "CustomersData";
+            Text = "Data of Customers";
             Load += CustomersDataForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView_customers).EndInit();
             ResumeLayout(false);
