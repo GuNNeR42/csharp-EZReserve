@@ -55,6 +55,7 @@
             button_customers.TabIndex = 1;
             button_customers.Text = "Customers";
             button_customers.UseVisualStyleBackColor = true;
+            button_customers.Click += button_customers_Click;
             // 
             // button_reservations
             // 
@@ -65,6 +66,7 @@
             button_reservations.TabIndex = 1;
             button_reservations.Text = "Reservations";
             button_reservations.UseVisualStyleBackColor = true;
+            button_reservations.Click += button_reservations_Click;
             // 
             // button_reporting
             // 
@@ -75,6 +77,7 @@
             button_reporting.TabIndex = 1;
             button_reporting.Text = "Reporting";
             button_reporting.UseVisualStyleBackColor = true;
+            button_reporting.Click += button_reporting_Click;
             // 
             // MainForm
             // 

@@ -11,5 +11,24 @@ namespace csharp_EZReserve.Forms
 
             InitializeComponent();
         }
+
+        private void button_customers_Click(object sender, EventArgs e)
+        {
+            // Open Customer form
+            CustomersDataForm form = new CustomersDataForm(_dbContext);
+            this.Hide();
+            form.ShowDialog();
+            this.Show();
+        }
+
+        private void button_reservations_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void button_reporting_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
