@@ -23,7 +23,7 @@ namespace csharp_EZReserve.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlite("Data Source=CustomerEvidence.db");
+            optionsBuilder.UseSqlite("Data Source=EZReserve.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

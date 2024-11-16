@@ -10,7 +10,7 @@ namespace csharp_EZReserve
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static async Task Main()
         {
             try
             {
@@ -22,9 +22,13 @@ namespace csharp_EZReserve
                     throw new InvalidOperationException("Database connection strings are not properly configured.");
                 }
 
+                using var sqliteContext = new SQLiteDbContext();
+
+                // Ensure database is created
+                await sqliteContext.Database.EnsureCreatedAsync();
 
                 ApplicationConfiguration.Initialize();
-                Application.Run(new MainForm());
+                Application.Run(new MainForm(sqliteContext));
             }
             catch (Exception ex)
             {
