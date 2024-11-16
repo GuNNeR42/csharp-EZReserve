@@ -1,3 +1,4 @@
+using csharp_EZReserve.Data;
 using csharp_EZReserve.Forms;
 
 namespace csharp_EZReserve
@@ -10,8 +11,9 @@ namespace csharp_EZReserve
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            // Verify configuration is accessible
+            var configuration = AppConfiguration.GetConfiguration();
+
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
         }
