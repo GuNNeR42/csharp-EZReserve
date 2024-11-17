@@ -17,6 +17,8 @@ namespace csharp_EZReserve.Forms.Customers
             label_streetAddress_data.Text = customer.StreetAddress;
             label_city_data.Text = customer.City;
             label_postalCode_data.Text = customer.PostalCode;
+
+            dataGridView_customerReservations.DataSource = customer.Reservations;
         }
     }
 }

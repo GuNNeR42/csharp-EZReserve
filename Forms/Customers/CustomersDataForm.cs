@@ -20,7 +20,7 @@ namespace csharp_EZReserve.Forms.Customers
 
         private void CustomersDataForm_Load(object sender, EventArgs e)
         {
-            #region Dataset custom column names
+            #region DataGridView custom column names
             dataGridView_customers.AutoGenerateColumns = false;
 
             dataGridView_customers.Columns.Add(new DataGridViewTextBoxColumn
@@ -126,7 +126,7 @@ namespace csharp_EZReserve.Forms.Customers
 
             // Show confirmation dialog
             var result = MessageBox.Show(
-                $"Are you sure you want to delete {customer.FullName}?",
+                $"Are you sure you want to delete {customer.FullName} and all his/her reservations?",
                 "Confirm Deletion",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning

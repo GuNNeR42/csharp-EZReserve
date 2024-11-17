@@ -113,7 +113,9 @@
             dataGridView_customerReservations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_customerReservations.Location = new Point(12, 122);
             dataGridView_customerReservations.Name = "dataGridView_customerReservations";
+            dataGridView_customerReservations.ReadOnly = true;
             dataGridView_customerReservations.RowHeadersWidth = 46;
+            dataGridView_customerReservations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView_customerReservations.Size = new Size(659, 222);
             dataGridView_customerReservations.TabIndex = 19;
             // 
