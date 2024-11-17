@@ -17,7 +17,7 @@ namespace csharp_EZReserve.Forms
         private void button_customers_Click(object sender, EventArgs e)
         {
             // Open Customer form
-            CustomersDataForm form = new CustomersDataForm(_dbContext);
+            CustomerListForm form = new CustomerListForm(_dbContext);
             this.Hide();
             form.ShowDialog();
             this.Show();
@@ -26,7 +26,7 @@ namespace csharp_EZReserve.Forms
         private void button_reservations_Click(object sender, EventArgs e)
         {
             // Open Reservations form
-            ReservationsDataForm form = new ReservationsDataForm(_dbContext);
+            ReservationListForm form = new ReservationListForm(_dbContext);
             this.Hide();
             form.ShowDialog();
             this.Show();

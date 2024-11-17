@@ -1,6 +1,6 @@
 ﻿namespace csharp_EZReserve.Forms.Reservations
 {
-    partial class ReservationsDataForm
+    partial class ReservationListForm
     {
         /// <summary>
         /// Required designer variable.
