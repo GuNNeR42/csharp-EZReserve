@@ -1,5 +1,6 @@
 using csharp_EZReserve.Data;
 using csharp_EZReserve.Forms.Customers;
+using csharp_EZReserve.Forms.Reservations;
 
 namespace csharp_EZReserve.Forms
 {
@@ -24,7 +25,11 @@ namespace csharp_EZReserve.Forms
 
         private void button_reservations_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            // Open Reservations form
+            ReservationsDataForm form = new ReservationsDataForm(_dbContext);
+            this.Hide();
+            form.ShowDialog();
+            this.Show();
         }
 
         private void button_reporting_Click(object sender, EventArgs e)
