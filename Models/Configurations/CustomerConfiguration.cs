@@ -35,6 +35,11 @@ namespace csharp_EZReserve.Models.Configurations
 
             builder.Property(c => c.PostalCode)
                 .HasColumnName("postal_code");
+
+            builder.HasMany(c => c.Reservations)
+                   .WithOne(r => r.Customer)
+                   .HasForeignKey(r => r.CustomerId)
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
