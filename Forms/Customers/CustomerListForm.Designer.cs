@@ -1,6 +1,6 @@
 ﻿namespace csharp_EZReserve.Forms.Customers
 {
-    partial class CustomersDataForm
+    partial class CustomerListForm
     {
         /// <summary>
         /// Required designer variable.

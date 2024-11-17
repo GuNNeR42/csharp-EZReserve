@@ -3,10 +3,10 @@ using System.Text.RegularExpressions;
 
 namespace csharp_EZReserve.Forms.Customers
 {
-    public partial class AddUpdateCustomerForm : Form
+    public partial class CustomerAddEditForm : Form
     {
         private Customer _customer;
-        public AddUpdateCustomerForm(Customer customer)
+        public CustomerAddEditForm(Customer customer)
         {
             _customer = customer;
 

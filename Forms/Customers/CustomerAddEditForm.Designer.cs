@@ -1,6 +1,6 @@
 ﻿namespace csharp_EZReserve.Forms.Customers
 {
-    partial class AddUpdateCustomerForm
+    partial class CustomerAddEditForm
     {
         /// <summary>
         /// Required designer variable.

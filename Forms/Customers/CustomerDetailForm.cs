@@ -2,10 +2,10 @@
 
 namespace csharp_EZReserve.Forms.Customers
 {
-    public partial class CustomerDetailsForm : Form
+    public partial class CustomerDetailForm : Form
     {
         private Customer _customer;
-        public CustomerDetailsForm(Customer customer)
+        public CustomerDetailForm(Customer customer)
         {
             _customer = customer;
 

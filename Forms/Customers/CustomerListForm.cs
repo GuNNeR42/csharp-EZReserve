@@ -4,12 +4,12 @@ using System.ComponentModel;
 
 namespace csharp_EZReserve.Forms.Customers
 {
-    public partial class CustomersDataForm : Form
+    public partial class CustomerListForm : Form
     {
         private readonly SQLiteDbContext _dbContext;
         private BindingList<Customer> customers;
 
-        public CustomersDataForm(SQLiteDbContext dbContext)
+        public CustomerListForm(SQLiteDbContext dbContext)
         {
             _dbContext = dbContext;
 
@@ -75,7 +75,7 @@ namespace csharp_EZReserve.Forms.Customers
             if (index < 0) return;
 
             Customer customer = customers[index];
-            CustomerDetailsForm form = new CustomerDetailsForm(customer);
+            CustomerDetailForm form = new CustomerDetailForm(customer);
 
             form.ShowDialog();
         }
@@ -83,7 +83,7 @@ namespace csharp_EZReserve.Forms.Customers
         private void button_add_Click(object sender, EventArgs e)
         {
             Customer customer = new Customer();
-            AddUpdateCustomerForm form = new AddUpdateCustomerForm(customer);
+            CustomerAddEditForm form = new CustomerAddEditForm(customer);
             form.Text = "Add Customer";
 
             if (DialogResult.OK == form.ShowDialog())
@@ -103,7 +103,7 @@ namespace csharp_EZReserve.Forms.Customers
             if (index < 0) return;
 
             Customer customer = customers[index];
-            AddUpdateCustomerForm form = new AddUpdateCustomerForm(customer);
+            CustomerAddEditForm form = new CustomerAddEditForm(customer);
             form.Text = "Update Customer";
 
             if (DialogResult.OK == form.ShowDialog())

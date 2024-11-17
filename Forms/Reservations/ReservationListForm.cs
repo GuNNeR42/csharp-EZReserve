@@ -4,12 +4,12 @@ using System.ComponentModel;
 
 namespace csharp_EZReserve.Forms.Reservations
 {
-    public partial class ReservationsDataForm : Form
+    public partial class ReservationListForm : Form
     {
         private readonly SQLiteDbContext _dbContext;
         private BindingList<Reservation> _reservations;
         private List<Customer> _customers;
-        public ReservationsDataForm(SQLiteDbContext dbContext)
+        public ReservationListForm(SQLiteDbContext dbContext)
         {
             _dbContext = dbContext;
 
@@ -82,7 +82,7 @@ namespace csharp_EZReserve.Forms.Reservations
         {
             Reservation reservation = new Reservation();
 
-            AddUpdateReservationForm form = new AddUpdateReservationForm(reservation, _dbContext);
+            ReservationAddEditForm form = new ReservationAddEditForm(reservation, _dbContext);
             form.Text = "Add new reservation";
             if(DialogResult.OK == form.ShowDialog())
             {
@@ -101,7 +101,7 @@ namespace csharp_EZReserve.Forms.Reservations
             if (index < 0) return;
 
             Reservation reservation = _reservations[index];
-            AddUpdateReservationForm form = new AddUpdateReservationForm(reservation, _dbContext, updating: true);
+            ReservationAddEditForm form = new ReservationAddEditForm(reservation, _dbContext, updating: true);
             form.Text = "Update reservation";
 
             if(DialogResult.OK == form.ShowDialog())

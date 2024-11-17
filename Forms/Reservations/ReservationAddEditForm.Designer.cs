@@ -1,6 +1,6 @@
 ﻿namespace csharp_EZReserve.Forms.Reservations
 {
-    partial class AddUpdateReservationForm
+    partial class ReservationAddEditForm
     {
         /// <summary>
         /// Required designer variable.

@@ -3,7 +3,7 @@ using csharp_EZReserve.Models.Entities;
 
 namespace csharp_EZReserve.Forms.Reservations
 {
-    public partial class AddUpdateReservationForm : Form
+    public partial class ReservationAddEditForm : Form
     {
         private SQLiteDbContext _dbContext;
         private Reservation _currentReservation;
@@ -34,7 +34,7 @@ namespace csharp_EZReserve.Forms.Reservations
             DateTime.Now.Date + TimeSpan.FromMinutes((int)DateTime.Now.TimeOfDay.TotalMinutes);
 
 
-        public AddUpdateReservationForm(Reservation currentReservation, SQLiteDbContext dbContext, bool updating = false)
+        public ReservationAddEditForm(Reservation currentReservation, SQLiteDbContext dbContext, bool updating = false)
         {
             _dbContext = dbContext;
             _currentReservation = currentReservation;

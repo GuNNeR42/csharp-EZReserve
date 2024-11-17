@@ -22,7 +22,7 @@ namespace csharp_EZReserve.Forms.Reservations
         {
             Customer customer = _reservation.Customer;
 
-            CustomerDetailsForm form = new CustomerDetailsForm(customer);
+            CustomerDetailForm form = new CustomerDetailForm(customer);
 
             form.ShowDialog();
         }
