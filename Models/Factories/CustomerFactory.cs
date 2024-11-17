@@ -8,13 +8,12 @@ namespace csharp_EZReserve.Models.Factories
         public CustomerFactory(bool withReservations = false) 
         {
             Faker
-                .RuleFor(c => c.CustomerId, f => f.IndexGlobal + 1)
                 .RuleFor(c => c.FirstName, f => f.Name.FirstName())
                 .RuleFor(c => c.LastName, f => f.Name.LastName())
                 .RuleFor(c => c.Email, (f, c) => f.Internet.Email(c.FirstName, c.LastName))
                 .RuleFor(c => c.StreetAddress, f => f.Address.StreetAddress())
                 .RuleFor(c => c.City, f => f.Address.City())
-                .RuleFor(c => c.PostalCode, f => f.Address.ZipCode())
+                .RuleFor(c => c.PostalCode, f => f.Address.ZipCode("### ##"))
                 .RuleFor(c => c.Reservations, (f, c) =>
                     withReservations ? GenerateNonOverlappingReservations(c.CustomerId, f.Random.Int(1, 5)) : new List<Reservation>());
         }
@@ -54,7 +53,6 @@ namespace csharp_EZReserve.Models.Factories
 
                 reservations.Add(new Reservation
                 {
-                    ReservationId = faker.IndexGlobal + 1,
                     CustomerId = customerId,
                     Room = room,
                     From = from,

@@ -1,6 +1,8 @@
 using csharp_EZReserve.Data;
 using csharp_EZReserve.Forms;
+using csharp_EZReserve.Models.Seeders;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace csharp_EZReserve
 {
@@ -26,6 +28,19 @@ namespace csharp_EZReserve
 
                 // Ensure database is created
                 await sqliteContext.Database.EnsureCreatedAsync();
+
+                // Configure logging
+                using var loggerFactory = LoggerFactory.Create(builder =>
+                {
+                    builder
+                        .SetMinimumLevel(LogLevel.Information);
+                });
+
+                var logger = loggerFactory.CreateLogger<DatabaseSeeder>();
+
+                // Initialize and run seeder
+                var seeder = new DatabaseSeeder(sqliteContext, logger);
+                await seeder.SeedAllAsync(100);
 
                 ApplicationConfiguration.Initialize();
                 Application.Run(new MainForm(sqliteContext));

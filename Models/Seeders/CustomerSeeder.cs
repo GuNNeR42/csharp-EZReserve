@@ -8,7 +8,7 @@ namespace csharp_EZReserve.Models.Seeders
     {
         private readonly SQLiteDbContext _context;
 
-        public CustomerSeeder(SQLiteDbContext context) : base(context, new CustomerFactory())
+        public CustomerSeeder(SQLiteDbContext context, bool withReservations = false) : base(context, new CustomerFactory(withReservations))
         {
             _context = context;
         }
