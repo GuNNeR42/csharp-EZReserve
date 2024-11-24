@@ -25,12 +25,12 @@ namespace csharp_EZReserve.Models.Configurations
                 .IsRequired();
 
             builder.Property(r => r.From)
-                .HasColumnName("from")
+                .HasColumnName("reserve_from")
                 .HasColumnType("datetime")
                 .IsRequired();
 
             builder.Property(r => r.To)
-                .HasColumnName("to")
+                .HasColumnName("reserve_to")
                 .HasColumnType("datetime")
                 .IsRequired();
 
