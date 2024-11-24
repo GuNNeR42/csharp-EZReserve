@@ -57,7 +57,11 @@ namespace csharp_EZReserve.Forms.Reporting
 
         private void button_graph_Click(object sender, EventArgs e)
         {
-
+            var data = (new GraphDataService(_dbContext)).FilterValues(_selectedFromDateTime, _selectedToDateTime);
+            GraphReportForm form = new GraphReportForm(data, _selectedFromDateTime, _selectedToDateTime);
+            this.Hide();
+            form.ShowDialog();
+            this.Show();
         }
     }
 }
