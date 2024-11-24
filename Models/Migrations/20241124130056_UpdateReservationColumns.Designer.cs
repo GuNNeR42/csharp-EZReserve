@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using csharp_EZReserve.Data;
 
@@ -10,9 +11,11 @@ using csharp_EZReserve.Data;
 namespace csharp_EZReserve.Models.Migrations
 {
     [DbContext(typeof(SQLiteDbContext))]
-    partial class SQLiteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241124130056_UpdateReservationColumns")]
+    partial class UpdateReservationColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -57,41 +60,6 @@ namespace csharp_EZReserve.Models.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("customers", (string)null);
-                });
-
-            modelBuilder.Entity("csharp_EZReserve.Models.Entities.CustomerReservationView", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("ReservationFrom")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("ReservationTo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Room")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("customer_reservation_view", (string)null);
                 });
 
             modelBuilder.Entity("csharp_EZReserve.Models.Entities.Reservation", b =>

@@ -1,6 +1,7 @@
 using csharp_EZReserve.Data;
 using csharp_EZReserve.Forms;
 using csharp_EZReserve.Models.Seeders;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -26,8 +27,8 @@ namespace csharp_EZReserve
 
                 using var sqliteContext = new SQLiteDbContext();
 
-                // Ensure database is created
-                await sqliteContext.Database.EnsureCreatedAsync();
+                // Ensure database is created and up to date
+                await sqliteContext.Database.MigrateAsync();
 
                 // Configure logging
                 using var loggerFactory = LoggerFactory.Create(builder =>
