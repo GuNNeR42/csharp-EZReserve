@@ -64,7 +64,22 @@ namespace csharp_EZReserve.Services
         protected virtual void ValidateAndSetupExportPath()
         {
             if (string.IsNullOrEmpty(_exportDirectory))
+            {
                 _exportDirectory = "./";
+                return;
+            }
+
+            if (!Directory.Exists(_exportDirectory))
+            {
+                try
+                {
+                    Directory.CreateDirectory(_exportDirectory);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException($"Failed to create export directory: {ex.Message}");
+                }
+            }
         }
 
         protected virtual void ValidateAndSetupFileName(DateTime from, DateTime to)
