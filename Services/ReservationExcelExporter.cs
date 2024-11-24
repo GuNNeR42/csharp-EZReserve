@@ -6,40 +6,18 @@ namespace csharp_EZReserve.Services
 {
     public class ReservationExcelExporter(SQLiteDbContext dbContext) : BaseExporter(dbContext)
     {
-        public override void Export(DateTime from, DateTime to)
+        protected override string FileExtension => ".xlsx";
+
+        protected override void ExportData(List<CustomerReservationView> data)
         {
-            // Add default export path, if not provided
-            if (string.IsNullOrEmpty(_exportDirectory))
-                _exportDirectory = "./";
-
-            // Add default file name, if not provided
-            if (string.IsNullOrEmpty(FileName))
-            {
-                FileName = $"Export_{from:dd_MM_yyyy_HH_mm}_{to:dd_MM_yyyy_HH_mm}.xlsx";
-            }
-            else
-            {
-                // Check if provided file name includes .csv extension and add it, if is not present
-                FileName = !FileName.EndsWith(".xlsx", StringComparison.OrdinalIgnoreCase)
-                    ? $"{FileName}.xlsx"
-                    : FileName;
-            }
-
-            var filteredData = GetFilteredReservations(from, to);
-
-            if (!filteredData.Any())
-                throw new InvalidOperationException("No data to export for the specified range.");
-
             using (var package = new ExcelPackage())
             {
                 var worksheet = package.Workbook.Worksheets.Add("Reservations");
 
-                PrepareDataForExporting(filteredData, worksheet);
+                PrepareDataForExporting(data, worksheet);
 
-                package.SaveAs(new FileInfo(_exportPath));
+                package.SaveAs(new FileInfo(ExportPath));
             }
-
-            Success = true;
         }
 
         private void PrepareDataForExporting(List<CustomerReservationView> data, ExcelWorksheet worksheet)

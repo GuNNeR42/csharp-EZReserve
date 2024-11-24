@@ -9,7 +9,8 @@ namespace csharp_EZReserve.Services
         public bool Success { get; protected set; }
         protected string _exportDirectory = string.Empty;
         protected readonly SQLiteDbContext _dbContext;
-        protected string _exportPath => Path.Combine(_exportDirectory, FileName);
+        protected string ExportPath => Path.Combine(_exportDirectory, FileName);
+        protected abstract string FileExtension { get; }
 
         public BaseExporter(SQLiteDbContext dbContext)
         {
@@ -38,13 +39,48 @@ namespace csharp_EZReserve.Services
             return this;
         }
 
-        protected List<CustomerReservationView> GetFilteredReservations(DateTime from, DateTime to)
+        protected virtual List<CustomerReservationView> GetFilteredReservations(DateTime from, DateTime to)
         {
             return _dbContext.Set<CustomerReservationView>()
                 .Where(r => r.ReservationFrom >= from && r.ReservationTo <= to)
                 .ToList();
         }
 
-        public abstract void Export(DateTime from, DateTime to);
+        public virtual void Export(DateTime from, DateTime to)
+        {
+            ValidateAndSetupExportPath();
+            ValidateAndSetupFileName(from, to);
+
+            var filteredData = GetFilteredReservations(from, to);
+            if (!filteredData.Any())
+                throw new InvalidOperationException("No data to export for the specified range.");
+
+            // Let child classes implement the actual export logic
+            ExportData(filteredData);
+
+            Success = true;
+        }
+
+        protected virtual void ValidateAndSetupExportPath()
+        {
+            if (string.IsNullOrEmpty(_exportDirectory))
+                _exportDirectory = "./";
+        }
+
+        protected virtual void ValidateAndSetupFileName(DateTime from, DateTime to)
+        {
+            if (string.IsNullOrEmpty(FileName))
+            {
+                FileName = $"Export_{from:dd_MM_yyyy_HH_mm}_{to:dd_MM_yyyy_HH_mm}{FileExtension}";
+            }
+            else
+            {
+                FileName = !FileName.EndsWith(FileExtension, StringComparison.OrdinalIgnoreCase)
+                    ? $"{FileName}{FileExtension}"
+                    : FileName;
+            }
+        }
+
+        protected abstract void ExportData(List<CustomerReservationView> data);
     }
 }

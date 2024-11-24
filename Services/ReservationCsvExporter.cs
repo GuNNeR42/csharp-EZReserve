@@ -6,36 +6,13 @@ namespace csharp_EZReserve.Services
 {
     public class ReservationCsvExporter(SQLiteDbContext dbContext) : BaseExporter(dbContext)
     {
+        protected override string FileExtension => ".csv";
 
-        public override void Export(DateTime from, DateTime to)
+        protected override void ExportData(List<CustomerReservationView> data)
         {
-            // Add default export path, if not provided
-            if(string.IsNullOrEmpty(_exportDirectory))
-                _exportDirectory = "./";
+            var csvData = PrepareDataForExporting(data);
 
-            // Add default file name, if not provided
-            if (string.IsNullOrEmpty(FileName))
-            {
-                FileName = $"Export_{from:dd_MM_yyyy_HH_mm}_{to:dd_MM_yyyy_HH_mm}.csv";
-            }
-            else
-            {
-                // Check if provided file name includes .csv extension and add it, if is not present
-                FileName = !FileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase)
-                    ? $"{FileName}.csv"
-                    : FileName;
-            }
-
-            var filteredData = GetFilteredReservations(from, to);
-
-            if (!filteredData.Any())
-                throw new InvalidOperationException("No data to export for the specified range.");
-
-            var csvData = PrepareDataForExporting(filteredData);
-
-            File.WriteAllText(_exportPath, csvData, Encoding.UTF8);
-
-            Success = true;
+            File.WriteAllText(ExportPath, csvData, Encoding.UTF8);
         }
 
         private string PrepareDataForExporting(List<CustomerReservationView> data)
