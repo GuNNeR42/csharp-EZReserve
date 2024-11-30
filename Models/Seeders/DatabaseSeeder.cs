@@ -5,13 +5,13 @@ namespace csharp_EZReserve.Models.Seeders
 {
     public class DatabaseSeeder
     {
-        private readonly SQLiteDbContext _sqliteContext;
+        private readonly BaseDbContext _dbContext;
         private readonly ILogger<DatabaseSeeder> _logger;
         public DatabaseSeeder(
-            SQLiteDbContext sqliteContext,
+            BaseDbContext appDbContext,
             ILogger<DatabaseSeeder> logger)
         {
-            _sqliteContext = sqliteContext;
+            _dbContext = appDbContext;
             _logger = logger;
         }
         public async Task SeedAllAsync(int? count = null)
@@ -29,10 +29,10 @@ namespace csharp_EZReserve.Models.Seeders
         }
         private async Task SeedCustomersAsync(int? count = null, bool withReservations = true)
         {
-            if (!_sqliteContext.Customers.Any())
+            if (!_dbContext.Customers.Any())
             {
                 _logger.LogInformation("Seeding customers...");
-                var seeder = new CustomerSeeder(_sqliteContext, withReservations);
+                var seeder = new CustomerSeeder(_dbContext, withReservations);
                 await seeder.SeedAsync(count);
             }
         }

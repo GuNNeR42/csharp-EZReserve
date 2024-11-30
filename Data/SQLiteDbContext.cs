@@ -1,40 +1,18 @@
-﻿using csharp_EZReserve.Models.Configurations;
-using csharp_EZReserve.Models.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace csharp_EZReserve.Data
 {
-    public class SQLiteDbContext : DbContext
+    public class SQLiteDbContext(IConfiguration config) : BaseDbContext(config)
     {
-        // Retrieve connection string from appSettings.json
-        private readonly string _connectionString;
-
-        public SQLiteDbContext()
+        protected override void ConfigureDatabase(DbContextOptionsBuilder optionsBuilder)
         {
-            var config = AppConfiguration.GetConfiguration();
-            _connectionString = config.GetConnectionString("SqliteConnection")!;
-        }
+            var connectionString = _config.GetConnectionString("SqliteConnection");
 
-        // Initiale DbSets for models and set data source
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<CustomerReservationView> CustomerReservationViews { get; set; }
+            if (string.IsNullOrEmpty(connectionString))
+                throw new InvalidOperationException("SQLite connection string is not configured.");
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-
-            optionsBuilder.UseSqlite(_connectionString);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
-            modelBuilder.ApplyConfiguration(new ReservationConfiguration());
-            modelBuilder.ApplyConfiguration(new CustomerReservationViewConfiguration());
+            optionsBuilder.UseSqlite(connectionString);
         }
     }
 }

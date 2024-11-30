@@ -5,7 +5,7 @@ namespace csharp_EZReserve.Forms.Reporting
 {
     public partial class ReportingForm : Form
     {
-        private SQLiteDbContext _dbContext;
+        private BaseDbContext _dbContext;
 
         // Ensure minute precision for selected DateTime values
         private DateTime _selectedFromDateTime =>
@@ -16,7 +16,7 @@ namespace csharp_EZReserve.Forms.Reporting
             dateTimePicker_toDate.Value.Date +
             TimeSpan.FromMinutes((int)dateTimePicker_toTime.Value.TimeOfDay.TotalMinutes);
 
-        public ReportingForm(SQLiteDbContext dbContext)
+        public ReportingForm(BaseDbContext dbContext)
         {
             _dbContext = dbContext;
             InitializeComponent();

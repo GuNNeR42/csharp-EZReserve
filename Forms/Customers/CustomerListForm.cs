@@ -6,10 +6,10 @@ namespace csharp_EZReserve.Forms.Customers
 {
     public partial class CustomerListForm : Form
     {
-        private readonly SQLiteDbContext _dbContext;
+        private readonly BaseDbContext _dbContext;
         private BindingList<Customer> customers;
 
-        public CustomerListForm(SQLiteDbContext dbContext)
+        public CustomerListForm(BaseDbContext dbContext)
         {
             _dbContext = dbContext;
 
