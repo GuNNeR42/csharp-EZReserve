@@ -5,7 +5,7 @@ namespace csharp_EZReserve.Forms.Reservations
 {
     public partial class ReservationAddEditForm : Form
     {
-        private SQLiteDbContext _dbContext;
+        private BaseDbContext _dbContext;
         private Reservation _currentReservation;
         private bool _updating;
         private List<Customer> _customers;
@@ -34,7 +34,7 @@ namespace csharp_EZReserve.Forms.Reservations
             DateTime.Now.Date + TimeSpan.FromMinutes((int)DateTime.Now.TimeOfDay.TotalMinutes);
 
 
-        public ReservationAddEditForm(Reservation currentReservation, SQLiteDbContext dbContext, bool updating = false)
+        public ReservationAddEditForm(Reservation currentReservation, BaseDbContext dbContext, bool updating = false)
         {
             _dbContext = dbContext;
             _currentReservation = currentReservation;

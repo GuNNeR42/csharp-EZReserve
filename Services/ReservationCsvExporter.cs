@@ -4,7 +4,7 @@ using System.Text;
 
 namespace csharp_EZReserve.Services
 {
-    public class ReservationCsvExporter(SQLiteDbContext dbContext) : BaseExporter(dbContext)
+    public class ReservationCsvExporter(BaseDbContext dbContext) : BaseExporter(dbContext)
     {
         protected override string FileExtension => ".csv";
 

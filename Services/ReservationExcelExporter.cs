@@ -4,7 +4,7 @@ using OfficeOpenXml;
 
 namespace csharp_EZReserve.Services
 {
-    public class ReservationExcelExporter(SQLiteDbContext dbContext) : BaseExporter(dbContext)
+    public class ReservationExcelExporter(BaseDbContext dbContext) : BaseExporter(dbContext)
     {
         protected override string FileExtension => ".xlsx";
 

@@ -4,9 +4,9 @@ namespace csharp_EZReserve.Services
 {
     public class GraphDataService
     {
-        private SQLiteDbContext _dbContext;
+        private BaseDbContext _dbContext;
 
-        public GraphDataService(SQLiteDbContext dbContext)
+        public GraphDataService(BaseDbContext dbContext)
         {
             _dbContext = dbContext;
         }

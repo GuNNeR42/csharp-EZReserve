@@ -7,8 +7,8 @@ namespace csharp_EZReserve.Forms
 {
     public partial class MainForm : Form
     {
-        private readonly SQLiteDbContext _dbContext;
-        public MainForm(SQLiteDbContext dbContext)
+        private readonly BaseDbContext _dbContext;
+        public MainForm(BaseDbContext dbContext)
         {
             _dbContext = dbContext;
 

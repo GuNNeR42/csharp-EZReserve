@@ -2,7 +2,6 @@ using csharp_EZReserve.Data;
 using csharp_EZReserve.Forms;
 using csharp_EZReserve.Models.Seeders;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace csharp_EZReserve
@@ -17,18 +16,28 @@ namespace csharp_EZReserve
         {
             try
             {
-                // Verify configuration is accessible
+                // Load configuration
                 var configuration = AppConfiguration.GetConfiguration();
+                var databaseProvider = configuration["DatabaseProvider"];
+                BaseDbContext dbContext;
 
-                if (string.IsNullOrEmpty(configuration.GetConnectionString("SQLiteConnection")))
+                // Validate the database provider
+                if (string.IsNullOrEmpty(databaseProvider))
                 {
-                    throw new InvalidOperationException("Database connection strings are not properly configured.");
+                    throw new InvalidOperationException("Database provider is not specified in the configuration.");
                 }
 
-                using var sqliteContext = new SQLiteDbContext();
+                // Select the appropriate DbContext
+                dbContext = databaseProvider switch
+                {
+                    "SQLite" => new SQLiteDbContext(configuration),
+                    "MySQL" => new MySqlDbContext(configuration),
+                    _ => throw new InvalidOperationException($"Unsupported database provider: {databaseProvider}")
+                };
+
 
                 // Ensure database is created and up to date
-                await sqliteContext.Database.MigrateAsync();
+                await dbContext.Database.MigrateAsync();
 
                 // Configure logging
                 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -40,17 +49,16 @@ namespace csharp_EZReserve
                 var logger = loggerFactory.CreateLogger<DatabaseSeeder>();
 
                 // Initialize and run seeder
-                var seeder = new DatabaseSeeder(sqliteContext, logger);
+                var seeder = new DatabaseSeeder(dbContext, logger);
                 await seeder.SeedAllAsync(100);
 
                 ApplicationConfiguration.Initialize();
-                Application.Run(new MainForm(sqliteContext));
+                Application.Run(new MainForm(dbContext));
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Application initalization error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            }
         }
+    }
 }

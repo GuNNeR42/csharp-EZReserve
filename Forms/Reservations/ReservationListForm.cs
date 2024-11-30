@@ -6,10 +6,10 @@ namespace csharp_EZReserve.Forms.Reservations
 {
     public partial class ReservationListForm : Form
     {
-        private readonly SQLiteDbContext _dbContext;
+        private readonly BaseDbContext _dbContext;
         private BindingList<Reservation> _reservations;
         private List<Customer> _customers;
-        public ReservationListForm(SQLiteDbContext dbContext)
+        public ReservationListForm(BaseDbContext dbContext)
         {
             _dbContext = dbContext;
 

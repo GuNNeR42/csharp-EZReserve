@@ -8,11 +8,11 @@ namespace csharp_EZReserve.Services
         public string FileName { get; protected set; }
         public bool Success { get; protected set; }
         protected string _exportDirectory = string.Empty;
-        protected readonly SQLiteDbContext _dbContext;
+        protected readonly BaseDbContext _dbContext;
         protected string ExportPath => Path.Combine(_exportDirectory, FileName);
         protected abstract string FileExtension { get; }
 
-        public BaseExporter(SQLiteDbContext dbContext)
+        public BaseExporter(BaseDbContext dbContext)
         {
             _dbContext = dbContext;
             FileName = string.Empty;
